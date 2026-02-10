@@ -1,0 +1,20 @@
+.results {
+    list-style: none;
+    position: absolute;
+    padding-left: 0px;
+    margin-top: 0px;
+    border-top: 3px black;
+    display: none;
+}
+
+.results li {
+    background-color: grey;
+    padding: 5px 1px;
+    text-decoration: none;
+    border-color: black;
+    border-width: 3px;
+    border-top: 0px;
+    border-style: solid;
+}
+
+.show {display:block;}
