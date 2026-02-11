@@ -39,7 +39,7 @@
 
 .temp::before {
     position: absolute;
-    top: 8px;
+    top: 49px;
     left: 8px;
     z-index: -1;
 }

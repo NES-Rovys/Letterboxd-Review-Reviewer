@@ -98,7 +98,7 @@ fStar.addEventListener('mouseleave', () => {
     }
   }
 });
-console.log();
+
 fStar.addEventListener('mouseup', () => {
   for (let i = 5; i > -1; i--) {
     if (document.getElementById(i).classList.contains('full')) {
