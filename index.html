@@ -12,7 +12,7 @@
       <div id="starContainer" class="cont"><span class="fa fa-star" id="1"></span><span class="fa fa-star" id="2"></span><span class="fa fa-star" id="3"></span><span class="fa fa-star" id="4"></span><span class="fa fa-star" id="5"></span></div>
       <span class="fa fa-star temp" id="temp"></span>
       <p id="stErr" class="error">Give a star rating</p>
-      <br/><input id="search_input" value="Select a movie" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue"></input><br/>
+      <br/><input id="search_input" value="Select a movie" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue;document.getElementById('results').classList.remove('show')"></input><br/>
       <ul id="results" class="results"></ul>
       <p id="movErr" class="error">Choose a movie</p>
       <button onclick="generate()">Generate Feedback</button><br/>
@@ -20,7 +20,7 @@
       <img src="test.jpg" width="100" height="200">
     </main>
 
-    <main id="feedbackPage">
+    <main id="feedbackPage" style="display: none;">
       <p id="loading">Writing Feedback...</p>
       <p id="feedback" style="display: none;">Feedback Goes Here</p>
       <button id="back" style="display: none;" onclick="backHome()">Back</button>

@@ -25,7 +25,7 @@ function renderMovies(res) {
   ul.innerHTML = '';
   res.results.forEach(result => {
     let li = document.createElement('li');
-    li.setAttribute('onClick', 'setMovie(this)');
+    li.setAttribute('onMouseDown', 'setMovie(this)');
     li.textContent = result.title;
     ul.appendChild(li);
     /*let img = document.createElement('img');
