@@ -18,3 +18,34 @@
 }
 
 .show {display:block;}
+
+.fa-star::before {
+    font-size: 80px;
+    color: black;
+}
+
+.half::before {
+    clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%);
+    color: blue;
+}
+
+.full::before {
+    color: blue;
+}
+
+.cont {
+    display: inline-block;
+}
+
+.temp::before {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: -1;
+}
+
+.st1::before {left: 8px;}
+.st2::before {left: 82px;}
+.st3::before {left: 157px;}
+.st4::before {left: 231px;}
+.st5::before {left: 305px;}
