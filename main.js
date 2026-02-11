@@ -3,10 +3,11 @@
 
 const BASE_URL = "https://api.themoviedb.org/3/";
 const API_KEY = "api_key=9b62c3eb4a6bc8acd4e26602f16fa744";
-let SEARCH_URL = BASE_URL + "search/movie?" + API_KEY + "&sort_by=popularity.desc&query=";
+let SEARCH_URL = BASE_URL + "search/multi?" + API_KEY + "&sort_by=popularity.desc&query=";
 var chosen = false;
-// Get shows as well
 // Add image
+// And localstorage
+// Error logic
 
 function getMovies(my_api) {
   return fetch(my_api, {
@@ -24,15 +25,18 @@ function renderMovies(res) {
   ul.classList.add("show");
   ul.innerHTML = '';
   res.results.forEach(result => {
-    let li = document.createElement('li');
-    li.setAttribute('onMouseDown', 'setMovie(this)');
-    li.textContent = result.title;
-    ul.appendChild(li);
-    /*let img = document.createElement('img');
-    img.src = "https://image.tmdb.org/t/p/w1280" + result.poster_path;
-    img.width = "100";
-    img.height = "100";
-    ul.appendChild(img);*/
+    if (result.gender == undefined) {
+      let li = document.createElement('li');
+      li.setAttribute('onMouseDown', 'setMovie(this)');
+      li.setAttribute('data-image', result.poster_path);
+      li.textContent = (result.title ?? result.name);
+      ul.appendChild(li);
+      let img = document.createElement('img');
+      img.src = "https://image.tmdb.org/t/p/w1280" + result.poster_path;
+      img.width = "0";
+      img.height = "0";
+      li.appendChild(img);
+    }
   });
 }
 
@@ -40,6 +44,7 @@ let fSearch = document.getElementById('search_input');
 fSearch.addEventListener('input', () => {
   let user_input = search_input.value;
   chosen = false;
+  document.getElementById('image').classList.remove('show');
   if (user_input && user_input.trim() != '') {
     let query = SEARCH_URL + user_input;
     getMovies(query).then(renderMovies)
@@ -52,6 +57,12 @@ fSearch.addEventListener('input', () => {
 function setMovie(movie) {
   document.getElementById('search_input').value = movie.textContent;
   document.getElementById('results').classList.remove("show");
+  let img = document.getElementById('image');
+  img.src = movie.children[0].src;
+  img.height = movie.children[0].naturalHeight / 10;
+  img.width = movie.children[0].naturalWidth / 10;
+  img.classList.add('show');
+  document.getElementById('movErr').classList.remove('show');
   chosen = true;
 }
 
@@ -106,6 +117,7 @@ fStar.addEventListener('mouseleave', () => {
 });
 
 fStar.addEventListener('mouseup', () => {
+  document.getElementById('stErr').classList.remove('show');
   for (let i = 5; i > -1; i--) {
     if (document.getElementById(i).classList.contains('full')) {
       stars = i;
@@ -169,4 +181,8 @@ function reset() {
     document.getElementById(i).classList.remove('full');
     document.getElementById(i).classList.remove('half');
   }
+}
+
+for (let i = 0; i < data.length; i++) {
+  console.log(data[i]['number'] == undefined);
 }

@@ -54,4 +54,8 @@
     display: none;
 }
 
+.image {
+    display: none;
+}
+
 .show {display:block;}
