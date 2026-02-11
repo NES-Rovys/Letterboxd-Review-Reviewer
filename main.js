@@ -124,7 +124,12 @@ fStar.addEventListener('mouseup', () => {
 function generate() {
   let review = document.getElementById('review');
   if (chosen && stars != 0 && review.value != review.defaultValue) {
-    console.log("slopped");
+    document.getElementById('inputPage').style.display = 'none';
+    document.getElementById('feedbackPage').style.display = 'block';
+    document.getElementById('movErr').classList.remove('show');
+    document.getElementById('stErr').classList.remove('show');
+    document.getElementById('revErr').classList.remove('show');
+    setTimeout(swapText, 3000);
   } else {
     if (!chosen) {
       document.getElementById('movErr').classList.add('show');
@@ -135,5 +140,33 @@ function generate() {
     if (review.value == review.defaultValue) {
       document.getElementById('revErr').classList.add('show');
     }
+  }
+}
+
+function swapText() {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('feedback').style.display = 'block';
+  document.getElementById('back').style.display = 'block';
+}
+
+function backHome() {
+  document.getElementById('inputPage').style.display = 'block';
+  document.getElementById('feedbackPage').style.display = 'none';
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('feedback').style.display = 'none';
+  document.getElementById('back').style.display = 'none';
+}
+
+function reset() {
+  document.getElementById('movErr').classList.remove('show');
+  document.getElementById('stErr').classList.remove('show');
+  document.getElementById('revErr').classList.remove('show');
+  document.getElementById('search_input').value = document.getElementById('search_input').defaultValue;
+  chosen = false;
+  document.getElementById('review').value = document.getElementById('review').defaultValue;
+  stars = 0;
+  for (let i = 1; i < 6; i++) {
+    document.getElementById(i).classList.remove('full');
+    document.getElementById(i).classList.remove('half');
   }
 }
