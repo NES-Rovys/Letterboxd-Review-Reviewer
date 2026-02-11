@@ -5,9 +5,7 @@ const BASE_URL = "https://api.themoviedb.org/3/";
 const API_KEY = "api_key=9b62c3eb4a6bc8acd4e26602f16fa744";
 let SEARCH_URL = BASE_URL + "search/multi?" + API_KEY + "&sort_by=popularity.desc&query=";
 var chosen = false;
-// Add image
 // And localstorage
-// Error logic
 
 function getMovies(my_api) {
   return fetch(my_api, {
@@ -141,6 +139,7 @@ function generate() {
     document.getElementById('movErr').classList.remove('show');
     document.getElementById('stErr').classList.remove('show');
     document.getElementById('revErr').classList.remove('show');
+    logic(document.getElementById('review').value, document.getElementById('search_input').value);
     setTimeout(swapText, 3000);
   } else {
     if (!chosen) {
@@ -183,6 +182,8 @@ function reset() {
   }
 }
 
-for (let i = 0; i < data.length; i++) {
-  console.log(data[i]['number'] == undefined);
+function logic(review, movie) {
+  for (let i = 0; i < data.length; i++) {
+    console.log(data[i]['number'] == undefined);
+  }
 }
