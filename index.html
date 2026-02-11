@@ -7,10 +7,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <body>
     <textarea id="review" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue">Add a review...</textarea><br/>
+    <p id="revErr" class="error">How did you not write anything</p>
     <div id="starContainer" class="cont"><span class="fa fa-star" id="1"></span><span class="fa fa-star" id="2"></span><span class="fa fa-star" id="3"></span><span class="fa fa-star" id="4"></span><span class="fa fa-star" id="5"></span></div>
     <span class="fa fa-star temp" id="temp"></span>
+    <p id="stErr" class="error">Give a star rating</p>
     <br/><input id="search_input" value="Select a movie" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue"></input><br/>
     <ul id="results" class="results"></ul>
+    <p id="movErr" class="error">Choose a movie</p>
+    <button onclick="generate()">Generate Feedback</button><br/>
     <img src="test.jpg" width="100" height="200">
   </body>
 <script src="main.js"></script>

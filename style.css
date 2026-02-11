@@ -17,8 +17,6 @@
     border-style: solid;
 }
 
-.show {display:block;}
-
 .fa-star::before {
     font-size: 80px;
     color: black;
@@ -49,3 +47,11 @@
 .st3::before {left: 157px;}
 .st4::before {left: 231px;}
 .st5::before {left: 305px;}
+
+.error {
+    color: red;
+    margin: 0;
+    display: none;
+}
+
+.show {display:block;}

@@ -1,9 +1,12 @@
 // SEARCH STUFF
 // LOCATED HERE
+
 const BASE_URL = "https://api.themoviedb.org/3/";
 const API_KEY = "api_key=9b62c3eb4a6bc8acd4e26602f16fa744";
 let SEARCH_URL = BASE_URL + "search/movie?" + API_KEY + "&sort_by=popularity.desc&query=";
+var chosen = false;
 // Get shows as well
+// Add image
 
 function getMovies(my_api) {
   return fetch(my_api, {
@@ -36,6 +39,7 @@ function renderMovies(res) {
 let fSearch = document.getElementById('search_input');
 fSearch.addEventListener('input', () => {
   let user_input = search_input.value;
+  chosen = false;
   if (user_input && user_input.trim() != '') {
     let query = SEARCH_URL + user_input;
     getMovies(query).then(renderMovies)
@@ -48,10 +52,13 @@ fSearch.addEventListener('input', () => {
 function setMovie(movie) {
   document.getElementById('search_input').value = movie.textContent;
   document.getElementById('results').classList.remove("show");
+  chosen = true;
 }
+
 
 // STAR STUFF
 // OVER HERE
+
 var stars = 0;
 
 let fStar = document.getElementById('starContainer');
@@ -81,7 +88,6 @@ fStar.addEventListener('mousemove', (event) => {
 });
 
 fStar.addEventListener('mouseleave', () => {
-  console.log('leave');
   for (let i = 1; i < 6; i++) {
     if (Math.ceil(stars) >= i) {
       if (stars < i && stars > i - 1) {
@@ -110,3 +116,24 @@ fStar.addEventListener('mouseup', () => {
     }
   }
 })
+
+
+// FEEDBACK STUFF
+// NOW DOWN HERE
+
+function generate() {
+  let review = document.getElementById('review');
+  if (chosen && stars != 0 && review.value != review.defaultValue) {
+    console.log("slopped");
+  } else {
+    if (!chosen) {
+      document.getElementById('movErr').classList.add('show');
+    }
+    if (stars == 0) {
+      document.getElementById('stErr').classList.add('show');
+    }
+    if (review.value == review.defaultValue) {
+      document.getElementById('revErr').classList.add('show');
+    }
+  }
+}
