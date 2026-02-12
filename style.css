@@ -177,11 +177,19 @@ button:active {
     width: 100px;
 }
 
-.graphics {
+.dots {
     position: fixed;
     top: 53px;
     left: 0px;
     z-index: 0;
+}
+
+.bits {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .show {display:block;}

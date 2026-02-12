@@ -7,6 +7,7 @@ let SEARCH_URL = BASE_URL + "search/multi?" + API_KEY + "&sort_by=popularity.des
 var chosen = false;
 // And localstorage
 // Movie add info
+// Sound to win
 
 function getMovies(my_api) {
   return fetch(my_api, {
@@ -168,19 +169,24 @@ function generate() {
   }
 }
 
-var swapColor = '';
+var swapColor = '#dc8631';
 
 function swapText() {
   document.getElementById('loadingPage').style.display = 'none';
   document.getElementById('feedbackPage').style.display = 'block';
   document.getElementById('body').style.backgroundColor = swapColor;
   dotOn = false;
+  bitsOn = true;
+  holder = [];
+  timer = 1000;
+  celebrate();
 }
 
 function backHome() {
   document.getElementById('inputPage').style.display = 'block';
   document.getElementById('feedbackPage').style.display = 'none';
   document.getElementById('body').style.backgroundColor = '#445567';
+  bitsOn = false;
 }
 
 function reset() {
@@ -197,7 +203,7 @@ function reset() {
   }
 }
 
-logic('eeee', 'Theddhi');
+//logic('eeee', 'Theddhi');
 
 function logic(review, movie) {
   let rating = Math.floor(Math.random() * 3);
@@ -239,8 +245,68 @@ function dotBounce() {
       circle[2] *= -1;
     }
   });
-  console.log(-(Math.abs(spot[0][1] - 32.5) / 13)+1);
   if (dotOn) {
     window.requestAnimationFrame(dotBounce);
+  }
+}
+
+var bitsOn = true;
+var holder = [];
+var timer = 1000;
+//celebrate();
+
+function celebrate() {
+  const canvas = document.getElementById("bits");
+  const bits = canvas.getContext("2d");
+  bits.canvas.width = window.innerWidth;
+  bits.canvas.height = window.innerHeight;
+  bits.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  bits.font = '50pt serif'
+  bits.textAlign = "center"; 
+  bits.textBaseline = "middle"; 
+  console.log(swapColor);
+  switch (swapColor) {
+    case '#3a9a33':
+      if (timer % 50 == 0 && timer > 0) {
+        holder[holder.length] = [emojis[0][Math.floor(Math.random() * emojis[0].length)], window.innerWidth / 2, window.innerHeight + 20, Math.floor(Math.random() * 90) + 45, 2, 4];
+      }
+      holder.forEach(item => {
+          bits.fillText(item[0], item[1], item[2]);
+          item[1] -= item[4] * Math.cos(item[3] * Math.PI / 180);
+          item[2] -= item[5] * Math.sin(item[3] * Math.PI / 180);
+          item[5] -= 0.01;
+      });
+      break;
+    case '#dc8631':
+      if (timer % 50 == 0 && timer > 0) {
+        holder[holder.length] = [emojis[1][Math.floor(Math.random() * emojis[1].length)], Math.random() * window.innerWidth, Math.random() * window.innerHeight, 0, 1];
+      }
+      holder.forEach(item => {
+        bits.font = item[3] + 'pt serif';
+        bits.fillText(item[0], item[1], item[2]);
+        item[3] += 0.6 * item[4];
+        if (item[3] >= 60) {
+          item[4] = -1;
+        } else if (item[3] <= 0) {
+          item[3] = 0;
+          item[4] = 0;
+        }
+      });
+      break;
+    case '#af3a30':
+      if (timer % 50 == 0 && timer > 0) {
+        holder[holder.length] = [emojis[2][Math.floor(Math.random() * emojis[2].length)], Math.random() * window.innerWidth, -40, Math.random() * 2 + 1];
+      }
+      holder.forEach(item => {
+        bits.fillText(item[0], item[1], item[2]);
+        item[2] += item[3];
+      });
+      break;
+  }
+  if (bitsOn && timer > -1000) {
+    timer--;
+    window.requestAnimationFrame(celebrate);
+  } else {
+    bits.clearRect(0, 0, window.innerWidth, window.innerHeight);
   }
 }

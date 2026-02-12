@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta charset="UTF-8">
   <head>
     <title>Letterboxd Review Reviewer</title>
   </head>
@@ -23,13 +24,14 @@
 
     <main id="loadingPage" class="pages" style="display: none;">
       <p id="loading" class="header" style="color:#ddecfd;">Writing Feedback<a style="color:#14181c;">...</a></p>
-      <canvas id="dots" class="graphics"></canvas>
+      <canvas id="dots" class="dots"></canvas>
     </main>
 
     <main id="feedbackPage" class="pages" style="display: none;">
       <p id="feedback" class="feedback">Feedback Goes Here</p>
       <button id="back" onclick="backHome()" class="back">BACK</button>
     </main>
+    <canvas id="bits" class="bits"></canvas>
   </body>
 <script src="responses.js"></script>
 <script src="main.js"></script>
