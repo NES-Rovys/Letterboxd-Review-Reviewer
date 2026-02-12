@@ -5,9 +5,9 @@
   </head>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <body>
-    <main id="inputPage">
-      <p class="header">Create your review</p>
+  <body id="body">
+    <main id="inputPage" style="display: block;">
+      <p class="header">Letterboxd Review Reviewer</p>
       <textarea id="review" class="regText review" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue" oninput="document.getElementById('revErr').classList.remove('show'); checkDefault(this)">Add a review...</textarea><br/>
       <p id="revErr" class="error">How did you not write anything</p>
       <br/><div id="starContainer" class="cont"><span class="fa fa-star" id="1"></span><span class="fa fa-star" id="2"></span><span class="fa fa-star" id="3"></span><span class="fa fa-star" id="4"></span><span class="fa fa-star" id="5"></span>
@@ -15,16 +15,19 @@
       <p id="stErr" class="error">Give a star rating</p>
       <br/><br/><input id="search_input" class="regText movie" value="Select a movie" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue;document.getElementById('results').classList.remove('show')" oninput="checkDefault(this)"></input><br/>
       <ul id="results" class="results"></ul>
-      <img id="image" src="test.jpg" width="100" height="200" class="image">
       <p id="movErr" class="error" style="margin-top: 5px;">Choose a movie</p><br/>
       <button onclick="generate()" class="generate">GENERATE FEEDBACK</button><br/><br/>
       <button onclick="reset()" class="reset">RESET</button>
+      <img id="image" src="test.jpg" width="100" height="200" class="image">
     </main>
 
-    <main id="feedbackPage" style="display: none;">
-      <p id="loading">Writing Feedback...</p>
-      <p id="feedback" style="display: none;">Feedback Goes Here</p>
-      <button id="back" style="display: none;" onclick="backHome()">Back</button>
+    <main id="loadingPage" class="pages" style="display: none;">
+      <p id="loading" class="header" style="color:#ddecfd;">Writing Feedback...</p>
+    </main>
+
+    <main id="feedbackPage" class="pages" style="display: none;">
+      <p id="feedback" class="feedback">Feedback Goes Here</p>
+      <button id="back" onclick="backHome()" class="back">BACK</button>
     </main>
   </body>
 <script src="responses.js"></script>

@@ -31,18 +31,25 @@ button:hover {
     position: absolute;
     padding-left: 0px;
     margin-top: 0px;
-    border-top: 3px black;
     display: none;
+    overflow: auto;
+    height: 200px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border: 1px solid #c8d8e8;
+    border-top: 1px solid #FFF;
 }
 
 .results li {
-    background-color: grey;
+    background-color: #677686;
+    color: #e5e8ec;
     padding: 5px 1px;
     text-decoration: none;
-    border-color: black;
-    border-width: 3px;
-    border-top: 0px;
-    border-style: solid;
+    cursor: default;
+}
+
+.results li:hover {
+    background-color: #41a838;
 }
 
 .fa-star::before {
@@ -66,19 +73,22 @@ button:hover {
 .cont {
     display: inline-block;
     cursor: pointer;
+    position: relative;
 }
 
 .temp::before {
     position: absolute;
     border-top: 0;
     z-index: -1;
+    left: 0;
+    top: 0;
 }
 
-.st1::before {left: 398px;}
-.st2::before {left: 435px;}
-.st3::before {left: 472px;}
-.st4::before {left: 509px;}
-.st5::before {left: 547px;}
+.st1::before {left: 0px;}
+.st2::before {left: 37px;}
+.st3::before {left: 74px;}
+.st4::before {left: 111px;}
+.st5::before {left: 148px;}
 
 .error {
     color: red;
@@ -136,6 +146,27 @@ button:hover {
 
 .filled {
     color: #465464;
+}
+
+.pages {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.feedback {
+    color: #fcfdff;
+    font-family: TiemposTextWeb, Georgia, serif;
+    font-size: 30pt;
+    margin-bottom: 15px;
+    max-width: 500px;
+}
+
+.back {
+    height: 30px;
+    width: 50px;
 }
 
 .show {display:block;}

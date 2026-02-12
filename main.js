@@ -6,8 +6,7 @@ const API_KEY = "api_key=9b62c3eb4a6bc8acd4e26602f16fa744";
 let SEARCH_URL = BASE_URL + "search/multi?" + API_KEY + "&sort_by=popularity.desc&query=";
 var chosen = false;
 // And localstorage
-// Star fix
-// Select ui
+// Movie add info
 
 function getMovies(my_api) {
   return fetch(my_api, {
@@ -121,6 +120,7 @@ fStar.addEventListener('mouseleave', () => {
     } else {
       document.getElementById(i).classList.remove('half');
       document.getElementById(i).classList.remove('full');
+      document.getElementById('temp').classList.remove('st' + i);
     }
   }
 });
@@ -145,13 +145,14 @@ fStar.addEventListener('mouseup', () => {
 function generate() {
   let review = document.getElementById('review');
   if (chosen && stars != 0 && review.value != review.defaultValue) {
+    logic(document.getElementById('review').value, document.getElementById('search_input').value);
     document.getElementById('inputPage').style.display = 'none';
-    document.getElementById('feedbackPage').style.display = 'block';
+    document.getElementById('loadingPage').style.display = 'block';
     document.getElementById('movErr').classList.remove('show');
     document.getElementById('stErr').classList.remove('show');
     document.getElementById('revErr').classList.remove('show');
-    logic(document.getElementById('review').value, document.getElementById('search_input').value);
-    setTimeout(swapText, 3000);
+    document.getElementById('body').style.backgroundColor = '#14181c';
+    setTimeout(swapText, 1);
   } else {
     if (!chosen) {
       document.getElementById('movErr').classList.add('show');
@@ -165,18 +166,18 @@ function generate() {
   }
 }
 
+var swapColor = '';
+
 function swapText() {
-  document.getElementById('loading').style.display = 'none';
-  document.getElementById('feedback').style.display = 'block';
-  document.getElementById('back').style.display = 'block';
+  document.getElementById('loadingPage').style.display = 'none';
+  document.getElementById('feedbackPage').style.display = 'block';
+  document.getElementById('body').style.backgroundColor = swapColor;
 }
 
 function backHome() {
   document.getElementById('inputPage').style.display = 'block';
   document.getElementById('feedbackPage').style.display = 'none';
-  document.getElementById('loading').style.display = 'block';
-  document.getElementById('feedback').style.display = 'none';
-  document.getElementById('back').style.display = 'none';
+  document.getElementById('body').style.backgroundColor = '#445567';
 }
 
 function reset() {
@@ -197,6 +198,7 @@ logic('eeee', 'Theddhi');
 
 function logic(review, movie) {
   let rating = Math.floor(Math.random() * 3);
+  switch(rating) {case 0: swapColor = '#af3a30'; break; case 1: swapColor = '#f19536'; break; case 2: swapColor = '#3a9a33'; break;};
   let points = [];
   data.forEach(option => {
     if (option['rating'] == rating || true) {
