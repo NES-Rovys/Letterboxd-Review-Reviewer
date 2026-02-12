@@ -179,7 +179,8 @@ function swapText() {
   dotOn = false;
   bitsOn = true;
   holder = [];
-  timer = 1000;
+  timer = 300;
+  prev = 300;
   then = Date.now();
   celebrate();
 }
@@ -211,6 +212,7 @@ function reset() {
 function logic(review, movie) {
   let rating = Math.floor(Math.random() * 3);
   switch(rating) {case 0: swapColor = '#af3a30'; break; case 1: swapColor = '#dc8631'; break; case 2: swapColor = '#3a9a33'; break;};
+  swapColor = '#3a9a33';
   let points = [];
   data.forEach(option => {
     if (option['rating'] == rating || true) {
@@ -281,11 +283,11 @@ function celebrate() {
   bits.clearRect(0, 0, window.innerWidth, window.innerHeight);
   bits.font = '50pt serif'
   bits.textAlign = "center"; 
-  bits.textBaseline = "middle"; 
+  bits.textBaseline = "middle";
   switch (swapColor) {
     case '#3a9a33':
       if (checkMod(prev, timer, 9) && timer > 0) {
-        holder[holder.length] = [emojis[0][Math.floor(Math.random() * emojis[0].length)], window.innerWidth / 2, window.innerHeight + 20, Math.floor(Math.random() * 90) + 45, 5, 20];
+        holder[holder.length] = [emojis[0][Math.floor(Math.random() * emojis[0].length)], window.innerWidth / 2, window.innerHeight + 20, Math.floor(Math.random() * 110) + 35, 5, 20];
       }
       holder.forEach(item => {
           bits.fillText(item[0], item[1], item[2]);
