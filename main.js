@@ -182,8 +182,23 @@ function reset() {
   }
 }
 
+logic('eeee', 'Theddhi');
+
 function logic(review, movie) {
-  for (let i = 0; i < data.length; i++) {
-    console.log(data[i]['number'] == undefined);
+  let rating = Math.floor(Math.random() * 3);
+  let points = [];
+  data.forEach(option => {
+    if (option['rating'] == rating || true) {
+      points[points.length] = [option['id'], ((points.length != 0) ? points[points.length - 1][1] : 0) + option['weight']];
+    }
+  });
+
+  let rng = Math.floor(Math.random() * (points[points.length - 1][1] + 1));
+  console.log(rng);
+  finding : for (let i = 0; i < points.length; i++) {
+    if (points[i][1] >= rng) {
+      console.log(data[points[i][0]]);
+      break finding;
+    }
   }
 }
