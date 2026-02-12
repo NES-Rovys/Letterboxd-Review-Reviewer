@@ -154,6 +154,7 @@ function generate() {
     document.getElementById('revErr').classList.remove('show');
     document.getElementById('body').style.backgroundColor = '#14181c';
     dotOn = true;
+    setFramerate();
     dotBounce();
     setTimeout(swapText, 2000);
   } else {
@@ -179,6 +180,7 @@ function swapText() {
   bitsOn = true;
   holder = [];
   timer = 1000;
+  setFramerate();
   celebrate();
 }
 
@@ -226,87 +228,102 @@ function logic(review, movie) {
 }
 
 var spot = [[498, 30, 1], [515, 37.5, -1], [532, 45, -1]];
-var dotOn = false;
+var dotOn = true;
+var now, then, elapsed;
+var fps = 15;
 
 function dotBounce() {
   const canvas = document.getElementById("dots");
   const dots = canvas.getContext("2d");
-  dots.canvas.width = 541;
-  dots.canvas.height = 60;
-  dots.clearRect(0, 0, 541, 60);
-  dots.fillStyle = '#ddecfd';
-  spot.forEach(circle => {
-    dots.beginPath();
-    dots.arc(circle[0], circle[1], 5.5, 0, 2 * Math.PI);
-    dots.fill();
-    let ease = Math.max((-(Math.abs(circle[1] - 37.5) / 7.5)+1), 0.01);
-    circle[1] += circle[2] * 0.3 * ease * (2 - ease);
-    if (circle[1] <= 30 || circle[1] >= 45) {
-      circle[2] *= -1;
-    }
-  });
+  if (elapsed > fps) {
+    then = now - (elapsed % fpsInterval);
+    dots.canvas.width = 541;
+    dots.canvas.height = 60;
+    dots.clearRect(0, 0, 541, 60);
+    dots.fillStyle = '#ddecfd';
+    spot.forEach(circle => {
+      dots.beginPath();
+      dots.arc(circle[0], circle[1], 5.5, 0, 2 * Math.PI);
+      dots.fill();
+      let ease = Math.max((-(Math.abs(circle[1] - 37.5) / 7.5)+1), 0.01);
+      circle[1] += circle[2] * 0.3 * ease * (2 - ease);
+      if (circle[1] <= 30 || circle[1] >= 45) {
+        circle[2] *= -1;
+      }
+    });
+  }
+  now = Date.now();
+  elapsed = now - then;
   if (dotOn) {
     window.requestAnimationFrame(dotBounce);
   }
 }
 
-var bitsOn = true;
+var bitsOn = false;
 var holder = [];
 var timer = 1000;
-//celebrate();
 
 function celebrate() {
   const canvas = document.getElementById("bits");
   const bits = canvas.getContext("2d");
-  bits.canvas.width = window.innerWidth;
-  bits.canvas.height = window.innerHeight;
-  bits.clearRect(0, 0, window.innerWidth, window.innerHeight);
-  bits.font = '50pt serif'
-  bits.textAlign = "center"; 
-  bits.textBaseline = "middle"; 
-  console.log(swapColor);
-  switch (swapColor) {
-    case '#3a9a33':
-      if (timer % 50 == 0 && timer > 0) {
-        holder[holder.length] = [emojis[0][Math.floor(Math.random() * emojis[0].length)], window.innerWidth / 2, window.innerHeight + 20, Math.floor(Math.random() * 90) + 45, 2, 4];
-      }
-      holder.forEach(item => {
-          bits.fillText(item[0], item[1], item[2]);
-          item[1] -= item[4] * Math.cos(item[3] * Math.PI / 180);
-          item[2] -= item[5] * Math.sin(item[3] * Math.PI / 180);
-          item[5] -= 0.01;
-      });
-      break;
-    case '#dc8631':
-      if (timer % 50 == 0 && timer > 0) {
-        holder[holder.length] = [emojis[1][Math.floor(Math.random() * emojis[1].length)], Math.random() * window.innerWidth, Math.random() * window.innerHeight, 0, 1];
-      }
-      holder.forEach(item => {
-        bits.font = item[3] + 'pt serif';
-        bits.fillText(item[0], item[1], item[2]);
-        item[3] += 0.6 * item[4];
-        if (item[3] >= 60) {
-          item[4] = -1;
-        } else if (item[3] <= 0) {
-          item[3] = 0;
-          item[4] = 0;
+  if (elapsed > fps) {
+    then = now - (elapsed % fpsInterval);
+    bits.canvas.width = window.innerWidth;
+    bits.canvas.height = window.innerHeight;
+    bits.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    bits.font = '50pt serif'
+    bits.textAlign = "center"; 
+    bits.textBaseline = "middle"; 
+    switch (swapColor) {
+      case '#3a9a33':
+        if (timer % 50 == 0 && timer > 0) {
+          holder[holder.length] = [emojis[0][Math.floor(Math.random() * emojis[0].length)], window.innerWidth / 2, window.innerHeight + 20, Math.floor(Math.random() * 90) + 45, 2, 4];
         }
-      });
-      break;
-    case '#af3a30':
-      if (timer % 50 == 0 && timer > 0) {
-        holder[holder.length] = [emojis[2][Math.floor(Math.random() * emojis[2].length)], Math.random() * window.innerWidth, -40, Math.random() * 2 + 1];
-      }
-      holder.forEach(item => {
-        bits.fillText(item[0], item[1], item[2]);
-        item[2] += item[3];
-      });
-      break;
-  }
-  if (bitsOn && timer > -1000) {
+        holder.forEach(item => {
+            bits.fillText(item[0], item[1], item[2]);
+            item[1] -= item[4] * Math.cos(item[3] * Math.PI / 180);
+            item[2] -= item[5] * Math.sin(item[3] * Math.PI / 180);
+            item[5] -= 0.01;
+        });
+        break;
+      case '#dc8631':
+        if (timer % 50 == 0 && timer > 0) {
+          holder[holder.length] = [emojis[1][Math.floor(Math.random() * emojis[1].length)], Math.random() * window.innerWidth, Math.random() * window.innerHeight, 0, 1];
+        }
+        holder.forEach(item => {
+          bits.font = item[3] + 'pt serif';
+          bits.fillText(item[0], item[1], item[2]);
+          item[3] += 0.5 * item[4];
+          if (item[3] >= 60) {
+            item[4] = -1;
+          } else if (item[3] <= 0) {
+            item[3] = 0;
+            item[4] = 0;
+          }
+        });
+        break;
+      case '#af3a30':
+        if (timer % 50 == 0 && timer > 0) {
+          holder[holder.length] = [emojis[2][Math.floor(Math.random() * emojis[2].length)], Math.random() * window.innerWidth, -40, Math.random() * 2 + 1];
+        }
+        holder.forEach(item => {
+          bits.fillText(item[0], item[1], item[2]);
+          item[2] += item[3];
+        });
+        break;
+    }
     timer--;
+  }
+  now = Date.now();
+  elapsed = now - then;
+  if (bitsOn && timer >= -1000) {
     window.requestAnimationFrame(celebrate);
   } else {
     bits.clearRect(0, 0, window.innerWidth, window.innerHeight);
   }
+}
+
+function setFramerate() {
+  fpsInterval = 1000 / fps;
+  then = Date.now();
 }
