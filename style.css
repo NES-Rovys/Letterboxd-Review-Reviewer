@@ -20,10 +20,15 @@ button {
     padding-inline: 6px;
     vertical-align: middle;
     cursor: pointer;
+    font-size: 15pt;
 }
 
 button:hover {
     background-color: #318b2b;
+}
+
+button:active {
+    background-color: #2b6c26;
 }
 
 .results {
@@ -33,7 +38,7 @@ button:hover {
     margin-top: 0px;
     display: none;
     overflow: auto;
-    height: 200px;
+    height: 400px;
     left: 50%;
     transform: translate(-50%, 0);
     border: 1px solid #c8d8e8;
@@ -46,6 +51,7 @@ button:hover {
     padding: 5px 1px;
     text-decoration: none;
     cursor: default;
+    font-size: 15pt;
 }
 
 .results li:hover {
@@ -53,7 +59,7 @@ button:hover {
 }
 
 .fa-star::before {
-    font-size: 40px;
+    font-size: 60px;
     color: #32404b;
 }
 
@@ -85,16 +91,17 @@ button:hover {
 }
 
 .st1::before {left: 0px;}
-.st2::before {left: 37px;}
-.st3::before {left: 74px;}
-.st4::before {left: 111px;}
-.st5::before {left: 148px;}
+.st2::before {left: 56px;}
+.st3::before {left: 111px;}
+.st4::before {left: 167px;}
+.st5::before {left: 223px;}
 
 .error {
-    color: red;
+    color: #cc3b2d;
     margin: 0;
     display: none;
     font-family: GraphikWeb, -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", Meiryo, sans-serif;
+    font-size: 15pt;
 }
 
 .image {
@@ -107,7 +114,7 @@ button:hover {
 .header {
     color: #fcfdff;
     font-family: TiemposTextWeb, Georgia, serif;
-    font-size: 22pt;
+    font-size: 40pt;
     font-weight: bold;
     margin-bottom: 15px;
 }
@@ -118,6 +125,7 @@ button:hover {
     border-radius: 0.2em;
     border-width: 0;
     font-family: GraphikWeb, -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", Meiryo, sans-serif;
+    font-size: 15pt;
 }
 
 .regText:focus {
@@ -125,23 +133,23 @@ button:hover {
 }
 
 .review {
-    width: 290px;
-    height: 200px;
+    width: 450px;
+    height: 250px;
 }
 
 .movie {
-    width: 180px;
-    height: 25px;
+    width: 250px;
+    height: 40px;
 }
 
 .generate {
-    height: 45px;
-    width: 100px;
+    height: 80px;
+    width: 180px;
 }
 
 .reset {
-    height: 30px;
-    width: 60px;
+    height: 50px;
+    width: 100px;
 }
 
 .filled {
@@ -159,14 +167,21 @@ button:hover {
 .feedback {
     color: #fcfdff;
     font-family: TiemposTextWeb, Georgia, serif;
-    font-size: 30pt;
+    font-size: 40pt;
     margin-bottom: 15px;
     max-width: 500px;
 }
 
 .back {
-    height: 30px;
-    width: 50px;
+    height: 50px;
+    width: 100px;
+}
+
+.graphics {
+    position: fixed;
+    top: 53px;
+    left: 0px;
+    z-index: 0;
 }
 
 .show {display:block;}

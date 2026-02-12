@@ -58,8 +58,8 @@ function setMovie(movie) {
   document.getElementById('results').classList.remove("show");
   let img = document.getElementById('image');
   img.src = movie.children[0].src;
-  img.height = movie.children[0].naturalHeight / 10;
-  img.width = movie.children[0].naturalWidth / 10;
+  img.height = movie.children[0].naturalHeight / 5;
+  img.width = movie.children[0].naturalWidth / 5;
   img.classList.add('show');
   document.getElementById('movErr').classList.remove('show');
   chosen = true;
@@ -140,7 +140,7 @@ fStar.addEventListener('mouseup', () => {
 
 
 // FEEDBACK STUFF
-// NOW DOWN HERE
+// AND SCREEN SWITCHING
 
 function generate() {
   let review = document.getElementById('review');
@@ -152,7 +152,9 @@ function generate() {
     document.getElementById('stErr').classList.remove('show');
     document.getElementById('revErr').classList.remove('show');
     document.getElementById('body').style.backgroundColor = '#14181c';
-    setTimeout(swapText, 1);
+    dotOn = true;
+    dotBounce();
+    setTimeout(swapText, 2000);
   } else {
     if (!chosen) {
       document.getElementById('movErr').classList.add('show');
@@ -172,6 +174,7 @@ function swapText() {
   document.getElementById('loadingPage').style.display = 'none';
   document.getElementById('feedbackPage').style.display = 'block';
   document.getElementById('body').style.backgroundColor = swapColor;
+  dotOn = false;
 }
 
 function backHome() {
@@ -198,7 +201,7 @@ logic('eeee', 'Theddhi');
 
 function logic(review, movie) {
   let rating = Math.floor(Math.random() * 3);
-  switch(rating) {case 0: swapColor = '#af3a30'; break; case 1: swapColor = '#f19536'; break; case 2: swapColor = '#3a9a33'; break;};
+  switch(rating) {case 0: swapColor = '#af3a30'; break; case 1: swapColor = '#dc8631'; break; case 2: swapColor = '#3a9a33'; break;};
   let points = [];
   data.forEach(option => {
     if (option['rating'] == rating || true) {
@@ -213,5 +216,31 @@ function logic(review, movie) {
       console.log(data[points[i][0]]);
       break finding;
     }
+  }
+}
+
+var spot = [[498, 30, 1], [515, 37.5, -1], [532, 45, -1]];
+var dotOn = false;
+
+function dotBounce() {
+  const canvas = document.getElementById("dots");
+  const dots = canvas.getContext("2d");
+  dots.canvas.width = 541;
+  dots.canvas.height = 60;
+  dots.clearRect(0, 0, 541, 60);
+  dots.fillStyle = '#ddecfd';
+  spot.forEach(circle => {
+    dots.beginPath();
+    dots.arc(circle[0], circle[1], 5.5, 0, 2 * Math.PI);
+    dots.fill();
+    let ease = Math.max((-(Math.abs(circle[1] - 37.5) / 7.5)+1), 0.01);
+    circle[1] += circle[2] * 0.3 * ease * (2 - ease);
+    if (circle[1] <= 30 || circle[1] >= 45) {
+      circle[2] *= -1;
+    }
+  });
+  console.log(-(Math.abs(spot[0][1] - 32.5) / 13)+1);
+  if (dotOn) {
+    window.requestAnimationFrame(dotBounce);
   }
 }
