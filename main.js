@@ -6,6 +6,8 @@ const API_KEY = "api_key=9b62c3eb4a6bc8acd4e26602f16fa744";
 let SEARCH_URL = BASE_URL + "search/multi?" + API_KEY + "&sort_by=popularity.desc&query=";
 var chosen = false;
 // And localstorage
+// Star fix
+// Select ui
 
 function getMovies(my_api) {
   return fetch(my_api, {
@@ -47,7 +49,7 @@ fSearch.addEventListener('input', () => {
     let query = SEARCH_URL + user_input;
     getMovies(query).then(renderMovies)
   }
-  if (fSearch.textContent = '') {
+  if (user_input == '') {
     document.getElementById('results').classList.remove("show");
   }
 });
@@ -64,6 +66,14 @@ function setMovie(movie) {
   chosen = true;
 }
 
+function checkDefault(content) {
+  if (content.value != content.defaultValue && content.value != '') {
+    content.classList.add('filled');
+  } else {
+    content.classList.remove('filled');
+  }
+}
+
 
 // STAR STUFF
 // OVER HERE
@@ -77,18 +87,18 @@ fStar.addEventListener('mousemove', (event) => {
   }
   document.getElementById('temp').classList.add('show');
   for (let i = 0; i < 10; i++) {
-    if ((event.clientX - fStar.clientLeft) / fStar.clientWidth >= i / 10) {
+    if ((event.clientX - fStar.offsetLeft) / fStar.clientWidth >= i / 10) {
       if (i % 2 == 0) {
-        document.getElementById((i / 2) + 1).classList.add('half');
+        document.getElementById((i / 2) + 1).classList.add('half', 'select');
         document.getElementById('temp').classList.add('st' + ((i / 2) + 1));
       } else {
-        document.getElementById((i + 1) / 2).classList.add('full');
+        document.getElementById((i + 1) / 2).classList.add('full', 'select');
         document.getElementById((i + 1) / 2).classList.remove('half');
         document.getElementById('temp').classList.remove('st' + ((i + 1) / 2));
       }
     } else {
       if (i % 2 == 0) {
-        document.getElementById((i / 2) + 1).classList.remove('half');
+        document.getElementById((i / 2) + 1).classList.remove('half', 'select');
       } else {
         document.getElementById((i + 1) / 2).classList.remove('full');
       }
@@ -98,6 +108,7 @@ fStar.addEventListener('mousemove', (event) => {
 
 fStar.addEventListener('mouseleave', () => {
   for (let i = 1; i < 6; i++) {
+    document.getElementById(i).classList.remove('select');
     if (Math.ceil(stars) >= i) {
       if (stars < i && stars > i - 1) {
         document.getElementById(i).classList.add('half');

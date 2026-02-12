@@ -7,18 +7,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <body>
     <main id="inputPage">
-      <p>Create your review</p>
-      <textarea id="review" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue" oninput="document.getElementById('revErr').classList.remove('show')">Add a review...</textarea><br/>
+      <p class="header">Create your review</p>
+      <textarea id="review" class="regText review" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue" oninput="document.getElementById('revErr').classList.remove('show'); checkDefault(this)">Add a review...</textarea><br/>
       <p id="revErr" class="error">How did you not write anything</p>
-      <div id="starContainer" class="cont"><span class="fa fa-star" id="1"></span><span class="fa fa-star" id="2"></span><span class="fa fa-star" id="3"></span><span class="fa fa-star" id="4"></span><span class="fa fa-star" id="5"></span></div>
-      <span class="fa fa-star temp" id="temp"></span>
+      <br/><div id="starContainer" class="cont"><span class="fa fa-star" id="1"></span><span class="fa fa-star" id="2"></span><span class="fa fa-star" id="3"></span><span class="fa fa-star" id="4"></span><span class="fa fa-star" id="5"></span>
+      <span class="fa fa-star temp" id="temp"></span></div>
       <p id="stErr" class="error">Give a star rating</p>
-      <br/><input id="search_input" value="Select a movie" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue;document.getElementById('results').classList.remove('show')"></input><br/>
+      <br/><br/><input id="search_input" class="regText movie" value="Select a movie" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue;document.getElementById('results').classList.remove('show')" oninput="checkDefault(this)"></input><br/>
       <ul id="results" class="results"></ul>
-      <img id="image" src="test.jpg" width="100" height="200" class="image"><br/>
-      <p id="movErr" class="error">Choose a movie</p>
-      <button onclick="generate()">Generate Feedback</button><br/>
-      <button onclick="reset()">Reset</button>
+      <img id="image" src="test.jpg" width="100" height="200" class="image">
+      <p id="movErr" class="error" style="margin-top: 5px;">Choose a movie</p><br/>
+      <button onclick="generate()" class="generate">GENERATE FEEDBACK</button><br/><br/>
+      <button onclick="reset()" class="reset">RESET</button>
     </main>
 
     <main id="feedbackPage" style="display: none;">

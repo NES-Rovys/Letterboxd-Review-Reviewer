@@ -1,3 +1,31 @@
+body {
+    background-color: #445567;
+}
+
+main {
+    align-items: center;
+    text-align: center;
+    position: static;
+}
+
+button {
+    color: #defbdc;
+    background-color: #00b020;
+    border-radius: 0.2em;
+    border-width: 0;
+    letter-spacing: 0.075em;
+    font-weight: 600;
+    font-family: GraphikWeb, -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", Meiryo, sans-serif;
+    padding-block: 1px;
+    padding-inline: 6px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #318b2b;
+}
+
 .results {
     list-style: none;
     position: absolute;
@@ -18,44 +46,96 @@
 }
 
 .fa-star::before {
-    font-size: 80px;
-    color: black;
+    font-size: 40px;
+    color: #32404b;
 }
 
 .half::before {
     clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%);
-    color: blue;
+    color: #00b020;
 }
 
 .full::before {
-    color: blue;
+    color: #00b020;
+}
+
+.select::before {
+    color: #5db8ef;
 }
 
 .cont {
     display: inline-block;
+    cursor: pointer;
 }
 
 .temp::before {
     position: absolute;
-    top: 90px;
-    left: 8px;
+    border-top: 0;
     z-index: -1;
 }
 
-.st1::before {left: 8px;}
-.st2::before {left: 82px;}
-.st3::before {left: 157px;}
-.st4::before {left: 231px;}
-.st5::before {left: 305px;}
+.st1::before {left: 398px;}
+.st2::before {left: 435px;}
+.st3::before {left: 472px;}
+.st4::before {left: 509px;}
+.st5::before {left: 547px;}
 
 .error {
     color: red;
     margin: 0;
     display: none;
+    font-family: GraphikWeb, -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", Meiryo, sans-serif;
 }
 
 .image {
     display: none;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: clamp(2px, calc(100% * .02666667), 8px) / clamp(2px, calc(100% * calc(.02666667 * (2 / 3))), 8px);
+}
+
+.header {
+    color: #fcfdff;
+    font-family: TiemposTextWeb, Georgia, serif;
+    font-size: 22pt;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.regText {
+    background-color: #ccdded;
+    color: #91a1b1;
+    border-radius: 0.2em;
+    border-width: 0;
+    font-family: GraphikWeb, -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", Meiryo, sans-serif;
+}
+
+.regText:focus {
+    background-color: #fcfeff;
+}
+
+.review {
+    width: 290px;
+    height: 200px;
+}
+
+.movie {
+    width: 180px;
+    height: 25px;
+}
+
+.generate {
+    height: 45px;
+    width: 100px;
+}
+
+.reset {
+    height: 30px;
+    width: 60px;
+}
+
+.filled {
+    color: #465464;
 }
 
 .show {display:block;}
