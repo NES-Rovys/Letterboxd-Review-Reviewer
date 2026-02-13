@@ -1,7 +1,3 @@
-var review = '';
-var movie = '';
-var stars = 0;
-var custom = '';
 var data = [
     {
         "id":0,
@@ -64,7 +60,7 @@ var data = [
         "id":9,
         "rating":2,
         "message":"7/10 too much water",
-        "weight":120,
+        "weight":150,
         "logic":water
     },
     {
@@ -97,7 +93,7 @@ var data = [
         "message":"You're such a crude.",
         "rating":0,
         "logic":swearing,
-        "weight": 120
+        "weight": 100
     },
     {
         "id":15,
@@ -211,15 +207,199 @@ var data = [
         "rating":2,
         "message":"Yeah, that deserves starval stars",
         "weight":20
+    },
+    {
+        "id":33,
+        "rating":1,
+        "message":"Needs better prose.",
+        "weight":18
+    },
+    {
+        "id":34,
+        "rating":2,
+        "message":"If it was any better you'd have to publish it.",
+        "weight":20
+    },
+    {
+        "id":35,
+        "rating":2,
+        "message":"My favourite part was when you said \"custval\".",
+        "weight":20,
+        "logic":getPhrase
+    },
+    {
+        "id":36,
+        "rating":2,
+        "message":"movval is so overrated.",
+        "weight":30,
+        "logic":lowerHalf
+    },
+    {
+        "id":37,
+        "rating":2,
+        "message":"movval is so underrated.",
+        "weight":30,
+        "logic":higherHalf
+    },
+    {
+        "id":38,
+        "rating":2,
+        "message":"The director really needed to listen to you.",
+        "weight":30,
+        "logic":lowerHalf
+    },
+    {
+        "id":39,
+        "rating":2,
+        "weight":30,
+        "logic":higherHalf,
+        "message":"You really explained why movval is good."
+    },
+    {
+        "id":40,
+        "message":"Too on the fence with starval stars.",
+        "rating":1,
+        "logic":middleStar,
+        "weight":30
+    },
+    {
+        "id":41,
+        "message":"end my suffering",
+        "weight":1,
+        "rating":2,
+    },
+    {
+        "id":42,
+        "message":"Out of this world review.",
+        "weight":20,
+        "rating":2
+    },
+    {
+        "id":43,
+        "message":"Autofill would've done better.",
+        "rating":0,
+        "weight":20
+    },
+    {
+        "id":44,
+        "message":"Never touch a keyboard again, actually.",
+        "rating":0,
+        "weight":20
+    },
+    {
+        "id":45,
+        "message":"How do you write so well?",
+        "rating":2,
+        "weight":20
+    },
+    {
+        "id":46,
+        "message":"\"custval\" could be reworded.",
+        "rating":1,
+        "logic":getPhrase,
+        "weight":20
+    },
+    {
+        "id":47,
+        "message":"\"custval\" needs to be reworded.",
+        "rating":0,
+        "logic":getPhrase,
+        "weight":20
+    },
+    {
+        "id":48,
+        "rating":2,
+        "message":"What does custval mean",
+        "logic":bigWord,
+        "weight":40
+    },
+    {
+        "id":49,
+        "message":"Couldn't have said it better myself.",
+        "rating":2,
+        "weight":20
+    },
+    {
+        "id":50,
+        "message":"Be better next time.",
+        "rating":1,
+        "weight":20
+    },
+    {
+        "id":51,
+        "rating":1,
+        "message":"I give this review a starval.",
+        "logic":middleStar,
+        "weight":20
+    },
+    {
+        "id":52,
+        "rating":2,
+        "message":"I love swear words.",
+        "logic":swearing,
+        "weight":80
+    },
+    {
+        "id":53,
+        "message":"You might be the goat for this one.",
+        "rating":2,
+        "weight":20
+    },
+    {
+        "id":54,
+        "message":"movval DOES deserve starval stars.",
+        "rating":2,
+        "weight":20
+    },
+    {
+        "id":55,
+        "message":"Never cook again.",
+        "rating":0,
+        "weight":20
+    },
+    {
+        "id":56,
+        "message":"PEAK",
+        "rating":2,
+        "weight":20
+    },
+    {
+        "id":57,
+        "rating":0,
+        "logic": tooBig,
+        "message":"I ain't reading all that.",
+        "weight":60
+    },
+    {
+        "id":58,
+        "rating":1,
+        "message":"Use a synonym for \"custval\"",
+        "weight":20,
+        "logic":getWord
+    },
+    {
+        "id":59,
+        "rating":2,
+        "message":"It's not great, but I'm letting you pass.",
+        "weight":20
     }
 ]
 
+var review = '';
+var movie = '';
+var stars = 0;
+var custom = '';
 var emojis = [["👍", "✅", "💸", "🥳", "🎉", "🏅", "⭐"], ["😐", "🫤", "🥈", "🤷", "❓"], ["😠", "❌", "💔", "📉", "🥶", "🙅"]];
 
 function lowStar() {return stars < 5}
+function lowerHalf() {return stars < 3}
 function highStar() {return stars > 0}
+function higherHalf() {return stars > 3}
+function middleStar() {return stars < 3.5 && stars > 1.5}
 function movCheck() {return review.includes(movie)}
 function water() {return review.includes("water")}
 function swearing() {return ["fuck", "shit", "bitch", "sex", "cunt"].some(word => review.includes(word))}
-function bigWord() {return (review.split(' ').length > 1 ? review.split(' ').sort(function(a,b){return b.length - a.length})[1].length : 0) > 10}
+function bigWord() {custom = review.split(' ').sort(function(a,b){return b.length - a.length})[1]; return (review.split(' ').length > 1 ? review.split(' ').sort(function(a,b){return b.length - a.length})[1].length : 0) > 10}
 function getWord() {custom = review.split(' ')[Math.floor(Math.random() * review.split(' ').length)].toLowerCase(); return true}
+function getPhrase() {let ran = Math.round(Math.random() * (review.split(' ').length - 3) + 2); custom = review.split(' ')[ran-2] +' '+review.split(' ')[ran-1]+' '+review.split(' ')[ran]; return review.split(' ').length > 3}
+function tooBig() {return review.split(' ').length >= 20}

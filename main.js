@@ -191,8 +191,8 @@ function swapText() {
   dotOn = false;
   bitsOn = true;
   holder = [];
-  timer = 300;
-  prev = 300;
+  timer = 200;
+  prev = 200;
   then = Date.now();
   celebrate();
 }
@@ -219,35 +219,25 @@ function reset() {
   }
 }
 
-/*document.getElementById('review').value = 'fefefeeffefe water bitchessssss';
-document.getElementById('search_input').value = 'efeef';
-stars = 0;
-//var test = 33;
-logic();
-document.getElementById('body').style.backgroundColor = swapColor;*/
-
 function logic() {
   let rating = Math.floor(Math.random() * 4);
   if (rating == 3) {
     rating = 2;
   }
-  //rating = data[test]['rating'];
   review = document.getElementById('review').value;
   movie = document.getElementById('search_input').value;
   if (saved.includes(review + movie + stars)) {
     rating = 0;
-    document.getElementById('feedback').innerHTML = 'You\'ve done that one already.';
+    document.getElementById('feedback').innerHTML = 'Can\'t submit the same thing twice.';
   } else {
 
     saved[saved.length] = review + movie + stars;
     let points = [];
     data.forEach(option => {
-      // && option['id'] == test
       if (option['rating'] == rating && (option['logic'] == undefined || option['logic']())) {
         points[points.length] = [option['id'], ((points.length != 0) ? points[points.length - 1][1] : 0) + option['weight']];
       }
     });
-
     let rng = Math.floor(Math.random() * (points[points.length - 1][1] + 1));
     finding : for (let i = 0; i < points.length; i++) {
       if (points[i][1] >= rng) {
@@ -255,7 +245,7 @@ function logic() {
         message = message.replaceAll('starval', stars);
         message = message.replaceAll('movval', movie);
         if (message.includes('custval')) {
-          data[points[i][0]]['logic'];
+          data[points[i][0]]['logic']();
           message = message.replaceAll('custval', custom);
         }
         document.getElementById('feedback').innerHTML = message;
@@ -331,8 +321,8 @@ function setDots() {
 
 var bitsOn = false;
 var holder = [];
-var timer = 300;
-var prev = 300;
+var timer = 200;
+var prev = 200;
 
 function celebrate() {
   const canvas = document.getElementById("bits");
