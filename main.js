@@ -126,17 +126,32 @@ fStar.addEventListener('mouseleave', () => {
   }
 });
 
-fStar.addEventListener('mouseup', () => {
+fStar.addEventListener('mouseup', (event) => {
   document.getElementById('stErr').classList.remove('show');
-  for (let i = 5; i > -1; i--) {
-    if (document.getElementById(i).classList.contains('full')) {
-      stars = i;
-      return;
-    } else if (document.getElementById(i).classList.contains('half')) {
-      stars = i - 0.5;
-      return;
+  for (let i = 1; i < 6; i++) {
+    document.getElementById(i).classList.remove('select');
+  }
+  for (let i = 0; i < 10; i++) {
+    if ((event.clientX - fStar.offsetLeft) / fStar.clientWidth >= i / 10) {
+      if (i % 2 == 0) {
+        document.getElementById((i / 2) + 1).classList.add('half');
+        document.getElementById('temp').classList.add('st' + ((i / 2) + 1));
+        stars = i / 2;
+      } else {
+        document.getElementById((i + 1) / 2).classList.add('full');
+        document.getElementById((i + 1) / 2).classList.remove('half');
+        document.getElementById('temp').classList.remove('st' + ((i + 1) / 2));
+        stars = i / 2;
+      }
+    } else {
+      if (i % 2 == 0) {
+        document.getElementById((i / 2) + 1).classList.remove('half');
+      } else {
+        document.getElementById((i + 1) / 2).classList.remove('full');
+      }
     }
   }
+  stars += 0.5;
 })
 
 
@@ -238,6 +253,10 @@ function logic() {
         let message = data[points[i][0]]['message'];
         message = message.replaceAll('starval', stars);
         message = message.replaceAll('movval', movie);
+        if (message.includes('custval')) {
+          data[points[i][0]]['logic'];
+          message = message.replaceAll('custval', custom);
+        }
         document.getElementById('feedback').innerHTML = message;
         break finding;
       }
