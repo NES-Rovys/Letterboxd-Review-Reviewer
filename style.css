@@ -40,7 +40,7 @@ button:active {
     margin-top: 0px;
     display: none;
     overflow: auto;
-    height: 400px;
+    max-height: 400px;
     left: 50%;
     transform: translate(-50%, 0);
     border: 1px solid #c8d8e8;
@@ -176,11 +176,6 @@ button:active {
     max-width: 1500px;
 }
 
-.back {
-    height: 50px;
-    width: 100px;
-}
-
 .dots {
     position: fixed;
     top: 53px;
@@ -197,3 +192,70 @@ button:active {
 }
 
 .show {display:block;}
+
+@media screen and (orientation: portrait) {
+    button {
+        font-size: 25pt;
+    }
+    
+    .header {
+        font-size: 60pt;
+    }
+
+    .regText {
+        font-size: 25pt;
+    }
+
+    .review {
+        width: 620px;
+        height: 500px;
+    }
+
+    .fa-star::before {
+        font-size: 80pt;
+    }
+
+    .st2::before {left: 99px;}
+    .st3::before {left: 198px;}
+    .st4::before {left: 297px;}
+    .st5::before {left: 396px;}
+
+    .movie {
+        width: 340px;
+        height: 60px;
+    }
+
+    .generate {
+        width: 270px;
+        height: 145px;
+    }
+
+    .reset {
+        width: 170px;
+        height: 85px;
+    }
+
+    .results {
+        max-height: 700px;
+    }
+
+    .results li {
+        font-size: 25pt;
+    }
+
+    .feedback {
+        font-size: 60pt;
+    }
+
+    .write {
+        font-size: 36pt;
+    }
+
+    .image {
+        margin-top: 40px;
+    }
+
+    .error {
+        font-size: 25pt;
+    }
+}

@@ -157,7 +157,7 @@ var data = [
     },
     {
         "id":24,
-        "message":"Could use some tweaks",
+        "message":"Could use some tweaks.",
         "rating":1,
         "weight":20,
     },
@@ -198,6 +198,18 @@ var data = [
         "id":30,
         "rating":0,
         "message":"This literally describes any piece of media",
+        "weight":20
+    },
+    {
+        "id":31,
+        "rating":0,
+        "message":"Performative starval star.",
+        "weight":20,
+    },
+    {
+        "id":32,
+        "rating":2,
+        "message":"Yeah, that deserves starval stars",
         "weight":20
     }
 ]

@@ -5,11 +5,12 @@ const BASE_URL = "https://api.themoviedb.org/3/";
 const API_KEY = "api_key=9b62c3eb4a6bc8acd4e26602f16fa744";
 let SEARCH_URL = BASE_URL + "search/multi?" + API_KEY + "&sort_by=popularity.desc&query=";
 var chosen = false;
+// Potential todo:
 // And localstorage
 // Movie add info
 // Sound to win
 // Phone ui
-// Stars/hover on phone
+// Search reset on nothing
 
 function getMovies(my_api) {
   return fetch(my_api, {
@@ -171,6 +172,7 @@ function generate() {
     document.getElementById('body').style.backgroundColor = '#14181c';
     dotOn = true;
     then = Date.now();
+    setDots();
     dotBounce();
     setTimeout(swapText, 2000);
   } else {
@@ -223,18 +225,20 @@ function reset() {
   }
 }
 
-document.getElementById('review').value = 'fefefeffefe';
+/*document.getElementById('review').value = 'fefefeeffefe water bitchessssss';
 document.getElementById('search_input').value = 'efeef';
-stars = 3;
+stars = 0;
+//var test = 33;
 logic();
-document.getElementById('body').style.backgroundColor = swapColor;
+document.getElementById('body').style.backgroundColor = swapColor;*/
 
 function logic() {
   let rating = Math.floor(Math.random() * 3);
-  rating = 1;
+  //rating = data[test]['rating'];
+  rating = 2;
   review = document.getElementById('review').value;
   movie = document.getElementById('search_input').value;
-  if (saved.includes(review + movie + stars) && false) {
+  if (saved.includes(review + movie + stars)) {
     rating = 0;
     document.getElementById('feedback').innerHTML = 'You\'ve done that one already.';
   } else {
@@ -242,6 +246,7 @@ function logic() {
     saved[saved.length] = review + movie + stars;
     let points = [];
     data.forEach(option => {
+      // && option['id'] == test
       if (option['rating'] == rating && (option['logic'] == undefined || option['logic']())) {
         points[points.length] = [option['id'], ((points.length != 0) ? points[points.length - 1][1] : 0) + option['weight']];
       }
@@ -269,6 +274,9 @@ function logic() {
 // WITH CANVAS
 
 var spot = [[498, 30, 1], [515, 37.5, -1], [532, 45, -1]];
+var radius = 5.5;
+var sides = [30, 45];
+var small = 0.03;
 var dotOn = false;
 var now, elapsed, delta;
 var then = Date.now();
@@ -288,16 +296,40 @@ function dotBounce() {
   dots.fillStyle = '#ddecfd';
   spot.forEach(circle => {
     dots.beginPath();
-    dots.arc(circle[0], circle[1], 5.5, 0, 2 * Math.PI);
+    dots.arc(circle[0], circle[1], radius, 0, 2 * Math.PI);
     dots.fill();
-    let ease = Math.max((-(Math.abs(circle[1] - 37.5) / 7.5)+1), 0.03);
+    let ease = Math.max((-(Math.abs(circle[1] - (sides[0] + sides[1]) / 2) / (sides[1] - sides[0]) / 2)+1), small);
     circle[1] += circle[2] * 0.9 * ease * (2 - ease) * delta;
-    if (circle[1] <= 30 || circle[1] >= 45) {
+    if (circle[1] <= sides[0] || circle[1] >= sides[1]) {
       circle[2] *= -1;
     }
   });
   if (dotOn) {
     window.requestAnimationFrame(dotBounce);
+  }
+}
+
+function setDots() {
+  if (window.getComputedStyle(document.getElementById('loading')).fontSize == '48px') {
+    radius = 4.6;
+    spot[0][0] = 448;
+    spot[0][1] = 20;
+    spot[1][0] = 462;
+    spot[1][1] = 27;
+    spot[2][0] = 476;
+    spot[2][1] = 34;
+    sides = [20, 34];
+    small = 0.05;
+  } else {
+    radius = 5.5;
+    spot[0][0] = 498;
+    spot[0][1] = 30;
+    spot[1][0] = 515;
+    spot[1][1] = 37.5;
+    spot[2][0] = 532;
+    spot[2][1] = 45;
+    sides = [30, 45];
+    small = 0.03;
   }
 }
 
@@ -322,13 +354,13 @@ function celebrate() {
   switch (swapColor) {
     case '#3a9a33':
       if (checkMod(prev, timer, 9) && timer > 0) {
-        holder[holder.length] = [emojis[0][Math.floor(Math.random() * emojis[0].length)], window.innerWidth / 2, window.innerHeight + 20, Math.floor(Math.random() * 110) + 35, 5, 20];
+        holder[holder.length] = [emojis[0][Math.floor(Math.random() * emojis[0].length)], window.innerWidth / 2, window.innerHeight + 20, Math.floor(Math.random() * 110) + 35, window.innerWidth / 271.6 , window.innerHeight / 44.7];
       }
       holder.forEach(item => {
           bits.fillText(item[0], item[1], item[2]);
           item[1] -= item[4] * Math.cos(item[3] * Math.PI / 180) * delta;
           item[2] -= item[5] * Math.sin(item[3] * Math.PI / 180) * delta;
-          item[5] -= 0.25 * delta;
+          item[5] -= (window.innerHeight / 3576) * delta;
       });
       break;
     case '#dc8631':
