@@ -5,12 +5,6 @@ const BASE_URL = "https://api.themoviedb.org/3/";
 const API_KEY = "api_key=9b62c3eb4a6bc8acd4e26602f16fa744";
 let SEARCH_URL = BASE_URL + "search/multi?" + API_KEY + "&sort_by=popularity.desc&query=";
 var chosen = false;
-// Potential todo:
-// And localstorage
-// Movie add info
-// Sound to win
-// Phone ui
-// Search reset on nothing
 
 function getMovies(my_api) {
   return fetch(my_api, {
@@ -233,9 +227,11 @@ logic();
 document.getElementById('body').style.backgroundColor = swapColor;*/
 
 function logic() {
-  let rating = Math.floor(Math.random() * 3);
+  let rating = Math.floor(Math.random() * 4);
+  if (rating == 3) {
+    rating = 2;
+  }
   //rating = data[test]['rating'];
-  rating = 2;
   review = document.getElementById('review').value;
   movie = document.getElementById('search_input').value;
   if (saved.includes(review + movie + stars)) {
