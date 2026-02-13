@@ -8,6 +8,8 @@ var chosen = false;
 // And localstorage
 // Movie add info
 // Sound to win
+// Phone ui
+// Stars/hover on phone
 
 function getMovies(my_api) {
   return fetch(my_api, {
@@ -78,8 +80,6 @@ function checkDefault(content) {
 // STAR STUFF
 // OVER HERE
 
-var stars = 0;
-
 let fStar = document.getElementById('starContainer');
 fStar.addEventListener('mousemove', (event) => {
   for (let i = 1; i < 6; i++) {
@@ -142,11 +142,12 @@ fStar.addEventListener('mouseup', () => {
 
 // FEEDBACK STUFF
 // AND SCREEN SWITCHING
+var saved = [];
 
 function generate() {
   let review = document.getElementById('review');
   if (chosen && stars != 0 && review.value != review.defaultValue) {
-    logic(document.getElementById('review').value, document.getElementById('search_input').value);
+    logic();
     document.getElementById('inputPage').style.display = 'none';
     document.getElementById('loadingPage').style.display = 'block';
     document.getElementById('movErr').classList.remove('show');
@@ -207,27 +208,42 @@ function reset() {
   }
 }
 
-//logic('eeee', 'Theddhi');
+document.getElementById('review').value = 'fefefeffefe';
+document.getElementById('search_input').value = 'efeef';
+stars = 3;
+logic();
+document.getElementById('body').style.backgroundColor = swapColor;
 
-function logic(review, movie) {
+function logic() {
   let rating = Math.floor(Math.random() * 3);
-  switch(rating) {case 0: swapColor = '#af3a30'; break; case 1: swapColor = '#dc8631'; break; case 2: swapColor = '#3a9a33'; break;};
-  swapColor = '#3a9a33';
-  let points = [];
-  data.forEach(option => {
-    if (option['rating'] == rating || true) {
-      points[points.length] = [option['id'], ((points.length != 0) ? points[points.length - 1][1] : 0) + option['weight']];
-    }
-  });
+  rating = 1;
+  review = document.getElementById('review').value;
+  movie = document.getElementById('search_input').value;
+  if (saved.includes(review + movie + stars) && false) {
+    rating = 0;
+    document.getElementById('feedback').innerHTML = 'You\'ve done that one already.';
+  } else {
 
-  let rng = Math.floor(Math.random() * (points[points.length - 1][1] + 1));
-  console.log(rng);
-  finding : for (let i = 0; i < points.length; i++) {
-    if (points[i][1] >= rng) {
-      console.log(data[points[i][0]]);
-      break finding;
+    saved[saved.length] = review + movie + stars;
+    let points = [];
+    data.forEach(option => {
+      if (option['rating'] == rating && (option['logic'] == undefined || option['logic']())) {
+        points[points.length] = [option['id'], ((points.length != 0) ? points[points.length - 1][1] : 0) + option['weight']];
+      }
+    });
+
+    let rng = Math.floor(Math.random() * (points[points.length - 1][1] + 1));
+    finding : for (let i = 0; i < points.length; i++) {
+      if (points[i][1] >= rng) {
+        let message = data[points[i][0]]['message'];
+        message = message.replaceAll('starval', stars);
+        message = message.replaceAll('movval', movie);
+        document.getElementById('feedback').innerHTML = message;
+        break finding;
+      }
     }
   }
+  switch(rating) {case 0: swapColor = '#af3a30'; break; case 1: swapColor = '#dc8631'; break; case 2: swapColor = '#3a9a33'; break;};
 }
 
 // ANIMATION STUFF

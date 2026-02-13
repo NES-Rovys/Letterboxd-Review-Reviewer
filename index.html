@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <body id="body">
-    <main id="inputPage" style="display: block;">
+    <main id="inputPage" style="display: none;">
       <p class="header">Letterboxd Review Reviewer</p>
       <textarea id="review" class="regText review" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue" oninput="document.getElementById('revErr').classList.remove('show'); checkDefault(this)">Add a review...</textarea><br/>
       <p id="revErr" class="error" style="margin-bottom:5px;">How did you not write anything</p>
@@ -27,7 +27,7 @@
       <canvas id="dots" class="dots"></canvas>
     </main>
 
-    <main id="feedbackPage" class="pages" style="display: none;">
+    <main id="feedbackPage" class="pages" style="display: block;">
       <p id="feedback" class="feedback">Feedback Goes Here</p>
       <button id="back" onclick="backHome()" class="back">BACK</button>
     </main>
