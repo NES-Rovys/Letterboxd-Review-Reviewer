@@ -22,11 +22,12 @@ function renderMovies(res) {
   ul.classList.add("show");
   ul.innerHTML = '';
   res.results.forEach(result => {
+    console.log(result);
     if (result.gender == undefined) {
       let li = document.createElement('li');
       li.setAttribute('onMouseDown', 'setMovie(this)');
       li.setAttribute('data-image', result.poster_path);
-      li.textContent = (result.title ?? result.name);
+      li.innerHTML = (result.title ?? result.name) + "<a class='year'> (" + (result.release_date.substring(0, 4) ?? result.first_air_date.substring(0, 4)) + ")";
       ul.appendChild(li);
       let img = document.createElement('img');
       img.src = "https://image.tmdb.org/t/p/w1280" + result.poster_path;

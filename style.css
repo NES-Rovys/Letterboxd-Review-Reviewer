@@ -191,6 +191,11 @@ button:active {
     pointer-events: none;
 }
 
+.year {
+    font-size: 15px;
+    color: #c5c7c9;
+}
+
 .show {display:block;}
 
 @media screen and (orientation: portrait) {
@@ -257,5 +262,9 @@ button:active {
 
     .error {
         font-size: 25pt;
+    }
+
+    .year {
+        font-size: 20pt;
     }
 }
